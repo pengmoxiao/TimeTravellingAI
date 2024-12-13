@@ -1,4 +1,4 @@
-import pygame,sys,time
+import pygame, sys
 
 # 初始化
 pygame.init()
@@ -31,7 +31,7 @@ player_color = (255, 0, 0)
 player_x = maze_x + 20
 player_y = maze_y + 20
 
-# 修正后的简单迷宫布局，0表示通道，1表示墙壁，这里只是示例，可以构建更复杂的
+# 修正后的简单迷宫布局，0表示通道，1表示墙壁
 maze_layout = [
     [1, 1, 1, 1, 1, 1],
     [1, 0, 0, 0, 0, 1],
@@ -43,72 +43,85 @@ maze_layout = [
 ]
 
 # 设置出口位置，确保它在通道上
-exit_x = maze_x + 20
-exit_y = maze_y + 20
+exit_x = maze_x + 260
+exit_y = maze_y + 260
 exit_size = 20
 exit_color = (0, 255, 0)
 
+# 时间控制
+move_interval = 200  # 单位为毫秒（每0.5秒移动一次）
+last_move_time = 0
+
 # 游戏主循环
+clock = pygame.time.Clock()
 while True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()
             sys.exit()
-    
-    # 获取当前按下的键
+
+    # 获取当前按键状态
     keys = pygame.key.get_pressed()
 
-    # 向上移动判断及处理
-    if keys[pygame.K_UP]:
-        new_y = player_y - player_size
-        if new_y >= maze_y and maze_layout[(new_y - maze_y) // player_size][(player_x - maze_x) // player_size] == 0:
-            player_y = new_y
-    
-    # 向下移动判断及处理
-    if keys[pygame.K_DOWN]:
-        new_y = player_y + player_size
-        if new_y <= maze_y + maze_height - player_size and maze_layout[(new_y - maze_y) // player_size][(player_x - maze_x) // player_size] == 0:
-            player_y = new_y
-    
-    # 向左移动判断及处理
-    if keys[pygame.K_LEFT]:
-        new_x = player_x - player_size
-        if new_x >= maze_x and maze_layout[(player_y - maze_y) // player_size][(new_x - maze_x) // player_size] == 0:
-            player_x = new_x
-            
-    
-    # 向右移动判断及处理
-    if keys[pygame.K_RIGHT]:
-        new_x = player_x + player_size
-        if new_x <= maze_x + maze_width - player_size and maze_layout[(player_y - maze_y) // player_size][(new_x - maze_x) // player_size] == 0:
-            player_x = new_x
-            
-    
+    # 获取当前时间
+    current_time = pygame.time.get_ticks()
+
+    # 每隔 move_interval 毫秒处理一次移动
+    if current_time - last_move_time >= move_interval:
+        if keys[pygame.K_UP]:
+            new_y = player_y - player_size
+            if new_y >= maze_y and maze_layout[(new_y - maze_y) // player_size][(player_x - maze_x) // player_size] == 0:
+                player_y = new_y
+
+        if keys[pygame.K_DOWN]:
+            new_y = player_y + player_size
+            if new_y <= maze_y + maze_height - player_size and maze_layout[(new_y - maze_y) // player_size][(player_x - maze_x) // player_size] == 0:
+                player_y = new_y
+
+        if keys[pygame.K_LEFT]:
+            new_x = player_x - player_size
+            if new_x >= maze_x and maze_layout[(player_y - maze_y) // player_size][(new_x - maze_x) // player_size] == 0:
+                player_x = new_x
+
+        if keys[pygame.K_RIGHT]:
+            new_x = player_x + player_size
+            if new_x <= maze_x + maze_width - player_size and maze_layout[(player_y - maze_y) // player_size][(new_x - maze_x) // player_size] == 0:
+                player_x = new_x
+
+        # 更新最后移动的时间戳
+        last_move_time = current_time
+
     # 判断是否按下空格键以及是否到达出口
     if keys[pygame.K_SPACE]:
-        if player_x + player_size >= exit_x and player_x <= exit_x + exit_size and player_y + player_size >= exit_y and player_y <= exit_y + exit_size:
+        if (
+            player_x + player_size >= exit_x
+            and player_x <= exit_x + exit_size
+            and player_y + player_size >= exit_y
+            and player_y <= exit_y + exit_size
+        ):
             print("开始游戏啦，后续可添加具体逻辑")
             exit()
 
     screen.fill((0, 0, 0))
-    
+
     # 绘制迷宫墙壁
     for row in range(len(maze_layout)):
         for col in range(len(maze_layout[row])):
             if maze_layout[row][col] == 1:
                 pygame.draw.rect(screen, wall_color, (maze_x + col * player_size, maze_y + row * player_size, player_size, player_size))
-    
+
     # 绘制玩家方块
     pygame.draw.rect(screen, player_color, (player_x, player_y, player_size, player_size))
-    
+
     # 绘制出口方块
     pygame.draw.rect(screen, exit_color, (exit_x, exit_y, exit_size, exit_size))
-    
+
     # 在屏幕上绘制游戏标题
     screen.blit(title_text, title_rect)
-    
+
     # 在屏幕上绘制开始游戏提示
     screen.blit(start_text, start_rect)
 
     # 更新显示
     pygame.display.flip()
+    clock.tick(60)
