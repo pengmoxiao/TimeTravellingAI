@@ -10,19 +10,19 @@ icon = pygame.image.load('icon.png')
 pygame.display.set_icon(icon)
 
 # 定义字体
-font = pygame.font.Font("SimHei.ttf", 36)
+font = pygame.font.Font("SimHei.ttf", 25)
 
 # 渲染游戏标题文本
 title_text = font.render("时间旅行解谜", True, (255, 255, 255))
-title_rect = title_text.get_rect(center=(screen_width // 2, screen_height // 3))
+title_rect = title_text.get_rect(center=(screen_width // 2, screen_height // 4))
 
 # 渲染开始游戏提示文本
 start_text = font.render("走到迷宫出口按空格键开始游戏", True, (255, 255, 255))
-start_rect = start_text.get_rect(center=(screen_width // 2, screen_height // 2))
+start_rect = start_text.get_rect(center=(screen_width // 2, screen_height // 3))
 
 # 迷宫相关设置
-maze_width = 300
-maze_height = 300
+maze_width = 150
+maze_height = 150
 maze_x = (screen_width - maze_width) // 2
 maze_y = (screen_height - maze_height) // 2
 wall_color = (100, 100, 100)
