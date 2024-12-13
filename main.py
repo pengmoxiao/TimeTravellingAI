@@ -43,8 +43,8 @@ maze_layout = [
 ]
 
 # 设置出口位置，确保它在通道上
-exit_x = maze_x + 260
-exit_y = maze_y + 260
+exit_x = maze_x + 80
+exit_y = maze_y + 100
 exit_size = 20
 exit_color = (0, 255, 0)
 
