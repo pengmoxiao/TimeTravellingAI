@@ -1,6 +1,6 @@
 import pygame
 import random
-import sys
+import sys,time
 
 # 初始化 Pygame
 pygame.init()
@@ -11,8 +11,9 @@ SCREEN_HEIGHT = 600
 background=pygame.image.load("bgchapter2.png")
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT),pygame.FULLSCREEN)
 pygame.display.set_caption("中世纪的城堡 - 解锁数字锁")
-
+notice=pygame.image.load("notice.jpg")
 image = pygame.transform.scale(background, (SCREEN_WIDTH, SCREEN_HEIGHT))
+notice=pygame.transform.scale(notice,(SCREEN_WIDTH,SCREEN_HEIGHT))
 # 颜色设置
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
@@ -57,15 +58,17 @@ def game_loop():
             if event.type == pygame.MOUSEBUTTONDOWN and not game_over:
                 # 点击查看历史事件
                 x, y = event.pos
-                if 50 <= x <= 250 and 100 <= y <= 200:  # 点击"查看历史事件"区域
-                    show_events = True  # 显示历史事件
+                #print(x,y)
+                if (184 <= x <= 235 and 82 <= y <= 193) or (565<=x<=612 and 71<=y<=191):  # 点击"查看历史事件"区域
+                    show_events = True
+                    #pass  # 显示历史事件
 
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_RETURN:
                     # 检查密码是否正确
-                    print(user_input,correct_password)
+                    #print(user_input,correct_password)
                     if user_input == correct_password:
-                        print(user_input,correct_password)
+                        #print(user_input,correct_password)
                         game_over = True  # 设置游戏结束
                     else:
                         user_input = []  # 重置输入
@@ -88,15 +91,19 @@ def game_loop():
         # 显示游戏结束的界面
         if game_over:
             draw_game_over()
+            pygame.display.update()
+            time.sleep(3)    # 等待3秒后退出游戏
+            pygame.quit()
+            sys.exit()
 
         pygame.display.update()
 
 def draw_input():
     """绘制当前密码输入"""
-    text = "输入密码: "
+    text = "       输入密码: "
     for i in range(input_pos):
         text += str(user_input[i])
-    input_text = font.render(text, True, BLACK)
+    input_text = font.render(text, True, WHITE)
     screen.blit(input_text, (50, 50))
 
 def draw_game_over():
@@ -104,13 +111,15 @@ def draw_game_over():
     text = "密码正确！房间已解锁！"
     game_over_text = big_font.render(text, True, GREEN)
     screen.blit(game_over_text, (SCREEN_WIDTH // 4, SCREEN_HEIGHT // 2))
+    
 
 def show_historical_events():
     """显示城堡的历史事件"""
     event_texts = []
     for event, year in historical_events:
         event_texts.append(f"{event} - {year}")
-
+    #screen.fill(WHITE)
+    screen.blit(notice,(0,0))
     # 显示历史事件
     y_offset = 200
     for text in event_texts:
