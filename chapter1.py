@@ -81,7 +81,7 @@ while running:
     render_question()
     pygame.display.flip()
     clock.tick(30)
-
+import chapter2
 pygame.quit()
 sys.exit()
 

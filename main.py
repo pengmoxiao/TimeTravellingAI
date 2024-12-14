@@ -100,7 +100,9 @@ while True:
             and player_y <= exit_y + exit_size
         ):
             print("开始游戏啦，后续可添加具体逻辑")
-            exit()
+            import chapter1
+            #chapter2.game_loop()
+            #exit()
 
     screen.fill((0, 0, 0))
 
