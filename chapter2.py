@@ -8,9 +8,11 @@ pygame.init()
 # 屏幕设置
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600
-screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+background=pygame.image.load("bgchapter2.png")
+screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT),pygame.FULLSCREEN)
 pygame.display.set_caption("中世纪的城堡 - 解锁数字锁")
 
+image = pygame.transform.scale(background, (SCREEN_WIDTH, SCREEN_HEIGHT))
 # 颜色设置
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
@@ -44,8 +46,8 @@ show_events = False
 def game_loop():
     global user_input, input_pos, game_over, show_events
     while True:
-        screen.fill(WHITE)
-
+        #screen.fill(WHITE)
+        screen.blit(image,(0,0))
         # 事件处理
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
