@@ -61,7 +61,7 @@ while True:
     if show_text:
         font = pygame.font.Font("../../fonts/SimHei.ttf", 36)
         text = font.render("玩具店，合适的工具", True, (255, 255, 255))
-        screen.blit(text, (817, 604))
+        screen.blit(text, (830, 604))
     if game_won:
         screen.blit(win_image, (0, 0))
 
