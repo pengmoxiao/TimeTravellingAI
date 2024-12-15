@@ -11,10 +11,10 @@ screen = pygame.display.set_mode((screen_width, screen_height))
 pygame.display.set_caption("维多利亚时代的伦敦")
 
 # 加载大街图片、商店内部图片等资源（这里假设你已经有对应的图片文件）
-street_image = pygame.transform.scale(pygame.image.load("street.png"),(screen_width,screen_height))
-store_image = pygame.transform.scale(pygame.image.load("store.png"),(screen_width,screen_height))
-rainy_street_image = pygame.transform.scale(pygame.image.load("rainy_street.png"),(screen_width,screen_height))
-win_image = pygame.transform.scale(pygame.image.load("win.png"),(screen_width,screen_height))
+street_image = pygame.transform.scale(pygame.image.load("../pic/chapter3street.png"),(screen_width,screen_height))
+store_image = pygame.transform.scale(pygame.image.load("../pic/chapter3store.png"),(screen_width,screen_height))
+rainy_street_image = pygame.transform.scale(pygame.image.load("../pic/chapter3rainy_street.png"),(screen_width,screen_height))
+win_image = pygame.transform.scale(pygame.image.load("../pic/chapter3win.png"),(screen_width,screen_height))
 
 # 一些用于游戏状态控制的变量
 current_image = street_image
@@ -56,7 +56,7 @@ while True:
 
     screen.blit(current_image, (0, 0))
     if show_text:
-        font = pygame.font.Font("fonts/SimHei.ttf", 36)
+        font = pygame.font.Font("../fonts/SimHei.ttf", 36)
         text = font.render("这里是一些初始文字提示", True, (255, 255, 255))
         screen.blit(text, (100, 100))
     if game_won:

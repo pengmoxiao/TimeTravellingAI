@@ -6,11 +6,11 @@ screen_width = 800
 screen_height = 600
 screen = pygame.display.set_mode((screen_width, screen_height))
 pygame.display.set_caption("时间旅行解谜游戏")
-icon = pygame.image.load('icon.png')
+icon = pygame.image.load('../icon.png')
 pygame.display.set_icon(icon)
 
 # 定义字体
-font = pygame.font.Font("fonts/SimHei.ttf", 25)
+font = pygame.font.Font("../fonts/SimHei.ttf", 25)
 
 # 渲染游戏标题文本
 title_text = font.render("时间旅行解谜", True, (255, 255, 255))

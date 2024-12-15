@@ -17,7 +17,7 @@ screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 pygame.display.set_caption("Ancient Pyramid Adventure")
 
 # Font setup
-font = pygame.font.Font("fonts/Arial Unicode MS.ttf", FONT_SIZE)
+font = pygame.font.Font("../fonts/Arial Unicode MS.ttf", FONT_SIZE)
 
 # Sample hieroglyphic puzzle data
 puzzle_data = [
