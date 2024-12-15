@@ -7,19 +7,13 @@ on:
     branches: [ main ]
 
 jobs:
-  build:
-
-    runs-on: ubuntu-latest
-
+  pyinstaller-build:
+    runs-on: <windows-latest / ubuntu-latest / ..... etc>
     steps:
-    - uses: actions/checkout@v4
-
-    - name: Package Application
-      uses: JackMcKew/pyinstaller-action-windows@main
-      with:
-        path: src
-
-    - uses: actions/upload-artifact@v4
-      with:
-        name: name-of-artifact
-        path: src/dist/windows
+      - name: Create Executable
+        uses: sayyid5416/pyinstaller@v1
+        with:
+          python_ver: '3.6'
+          spec: 'src/main.py'
+          upload_exe_with_name: 'My executable'
+          options: --onefile, --name "TimeTravelling", --windowed, 
