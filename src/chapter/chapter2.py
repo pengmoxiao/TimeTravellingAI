@@ -8,15 +8,15 @@ pygame.init()
 # 屏幕设置
 SCREEN_WIDTH = 1920
 SCREEN_HEIGHT = 1080
-background=pygame.image.load("../pic/chapter2bg.png")
+background=pygame.image.load("../../pic/chapter2bg.png")
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT),pygame.FULLSCREEN)
 #screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 pygame.display.set_caption("中世纪的城堡 - 解锁数字锁")
-notice=pygame.image.load("../pic/chapter2notice.jpg")
+notice=pygame.image.load("../../pic/chapter2notice.jpg")
 image = pygame.transform.scale(background, (SCREEN_WIDTH, SCREEN_HEIGHT))
 notice=pygame.transform.scale(notice,(SCREEN_WIDTH,SCREEN_HEIGHT))
 # 颜色设置
-winimg = pygame.transform.scale(pygame.image.load("../pic/chapter2win.png"), (SCREEN_WIDTH, SCREEN_HEIGHT))
+winimg = pygame.transform.scale(pygame.image.load("../../pic/chapter2win.png"), (SCREEN_WIDTH, SCREEN_HEIGHT))
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
 BLUE = (0, 0, 255)
@@ -24,8 +24,8 @@ GREEN = (0, 255, 0)
 RED = (255, 0, 0)
 GOLD = (255, 215, 0)
 # 字体设置
-font = pygame.font.Font("../fonts/SimHei.ttf", 36)
-big_font = pygame.font.Font("../fonts/SimHei.ttf", 48)
+font = pygame.font.Font("../../fonts/SimHei.ttf", 36)
+big_font = pygame.font.Font("../../fonts/SimHei.ttf", 48)
 
 historical_events = [
     ("城堡建造", random.randint(1000, 1100)),
