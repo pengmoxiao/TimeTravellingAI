@@ -17,6 +17,8 @@ image = pygame.transform.scale(background, (SCREEN_WIDTH, SCREEN_HEIGHT))
 notice=pygame.transform.scale(notice,(SCREEN_WIDTH,SCREEN_HEIGHT))
 # 颜色设置
 winimg = pygame.transform.scale(pygame.image.load("../../pic/chapter2win.png"), (SCREEN_WIDTH, SCREEN_HEIGHT))
+idea=pygame.transform.scale(pygame.image.load("../../pic/idea.png"),(300,300))
+hint=False
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
 BLUE = (0, 0, 255)
@@ -47,10 +49,10 @@ input_pos = 0
 attemps =0 
 # 控制是否展示历史事件
 show_events = False
-
+hint=False
 # 游戏循环
 def game_loop():
-    global user_input, input_pos, game_over, show_events,attemps
+    global user_input, input_pos, game_over, show_events,attemps,hint
     while True:
         #screen.fill(WHITE)
         screen.blit(image,(0,0))
@@ -59,7 +61,7 @@ def game_loop():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
-
+            
             if event.type == pygame.MOUSEBUTTONDOWN and not game_over:
                 # 点击查看历史事件
                 x, y = event.pos
@@ -67,6 +69,8 @@ def game_loop():
                 if (438 <= x <= 564 and 147 <= y <= 352) or (1353<=x<=1469 and 131<=y<=346):  # 点击"查看历史事件"区域
                     show_events = True
                     #pass  # 显示历史事件
+                if 1730<=x<=1821 and 96<=y<=246:
+                    hint=(not hint)
 
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_RETURN:
@@ -117,7 +121,10 @@ def game_loop():
             show_historical_events()
         else:
             draw_input()
-
+        screen.blit(idea, (SCREEN_WIDTH-300, 10))
+        if hint:
+            text = font.render("你来到了中世纪的加法堡，你需要找线索，破解密码，打开大门，获得里面的魔法物品", True, (255, 255, 255))
+            screen.blit(text, (100,150))
         # 显示游戏结束的界面
         if game_over:
             draw_game_over()

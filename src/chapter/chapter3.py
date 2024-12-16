@@ -10,18 +10,20 @@ screen_height = 1080
 screen = pygame.display.set_mode((screen_width, screen_height))
 pygame.display.set_caption("维多利亚时代的伦敦")
 font = pygame.font.Font("../../fonts/SimHei.ttf", 36)
-# 加载大街图片、商店内部图片等资源（这里假设你已经有对应的图片文件）
+# 加载大街图片、商店内部图片等资源
 street_image = pygame.transform.scale(pygame.image.load("../../pic/chapter3street.png"),(screen_width,screen_height))
 store_image = pygame.transform.scale(pygame.image.load("../../pic/chapter3store.png"),(screen_width,screen_height))
 rainy_street_image = pygame.transform.scale(pygame.image.load("../../pic/chapter3rainy_street.png"),(screen_width,screen_height))
 win_image = pygame.transform.scale(pygame.image.load("../../pic/chapter3win.png"),(screen_width,screen_height))
 bookpage=pygame.transform.scale(pygame.image.load("../../pic/chapter3bookpage.png"),(screen_width,screen_height))
+idea=pygame.transform.scale(pygame.image.load("../../pic/idea.png"),(300,300))
 # 一些用于游戏状态控制的变量
 current_image = street_image
 show_text = False
 game_won = False
 hidden1=False
 hidden2=False
+hint=False
 while True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -30,8 +32,10 @@ while True:
         elif event.type == pygame.MOUSEBUTTONDOWN:
             x,y=event.pos
             print(x,y)
+            if 1730<=x<=1821 and 96<=y<=246:
+                hint=(not hint)
             if current_image == street_image:
-                # 点击人物显示文字的逻辑（这里简单示例，实际可能更复杂）
+                # 点击人物显示文字的逻辑（
                 if 817<=x<=878 and 604<=y<=956:
                     show_text = True
                 # 点击商店的逻辑
@@ -39,13 +43,13 @@ while True:
                     current_image = store_image
                     show_text = False
             elif current_image == store_image:
-                # 点击遥控器的逻辑（这里简单示例，假设遥控器位置在某个范围）
+                # 点击遥控器的逻辑
                 if 876<=x<=881 and 321<=y<=329:
                     current_image = rainy_street_image
                 elif 63<=x<=249 and 1000<=y<=1038:
                     current_image=street_image
             elif current_image == rainy_street_image:
-                # 点击隐藏物品的计数逻辑（这里简单示例两个隐藏物品，实际需精确判断位置）
+                # 点击隐藏物品的计数逻辑（这里两个隐藏物品，实际需精确判断位置）
                 #hidden_items_clicked = 0
                 if 1397<=x<=1439 and 1016<=y<=1048:
                     #hidden_items_clicked += 1
@@ -83,8 +87,12 @@ while True:
                     game_won = True
 
     screen.blit(current_image, (0, 0))
+    screen.blit(idea, (screen_width-300, 10))
+    if hint:
+        text = font.render("你来到了维多利亚时代的伦敦，你需要找到两个隐藏物品，来激活时间机器，去往未来。小心一语双关！", True, (255, 255, 255))
+        screen.blit(text, (50,100))
     if show_text:
-        font = pygame.font.Font("../../fonts/SimHei.ttf", 36)
+
         text = font.render("玩具店，合适的工具", True, (255, 255, 255))
         screen.blit(text, (830, 604))
     if game_won:
