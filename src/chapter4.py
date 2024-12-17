@@ -91,7 +91,7 @@ def main():
 
         # 检查电路是否连接成功
         if circuit_board.check_circuit():
-            font = font = pygame.font.Font("../../fonts/SimHei.ttf", 36)
+            font = font = pygame.font.Font("../fonts/SimHei.ttf", 36)
             text = font.render("电路已激活！", True, (0, 128, 0))
             screen.blit(text, (screen_width // 2 - text.get_width() // 2, screen_height // 2))
 

@@ -9,14 +9,14 @@ screen_width = 1920
 screen_height = 1080
 screen = pygame.display.set_mode((screen_width, screen_height))
 pygame.display.set_caption("维多利亚时代的伦敦")
-font = pygame.font.Font("../../fonts/SimHei.ttf", 36)
+font = pygame.font.Font("../fonts/SimHei.ttf", 36)
 # 加载大街图片、商店内部图片等资源
-street_image = pygame.transform.scale(pygame.image.load("../../pic/chapter3street.png"),(screen_width,screen_height))
-store_image = pygame.transform.scale(pygame.image.load("../../pic/chapter3store.png"),(screen_width,screen_height))
-rainy_street_image = pygame.transform.scale(pygame.image.load("../../pic/chapter3rainy_street.png"),(screen_width,screen_height))
-win_image = pygame.transform.scale(pygame.image.load("../../pic/chapter3win.png"),(screen_width,screen_height))
-bookpage=pygame.transform.scale(pygame.image.load("../../pic/chapter3bookpage.png"),(screen_width,screen_height))
-idea=pygame.transform.scale(pygame.image.load("../../pic/idea.png"),(300,300))
+street_image = pygame.transform.scale(pygame.image.load("../pic/chapter3street.png"),(screen_width,screen_height))
+store_image = pygame.transform.scale(pygame.image.load("../pic/chapter3store.png"),(screen_width,screen_height))
+rainy_street_image = pygame.transform.scale(pygame.image.load("../pic/chapter3rainy_street.png"),(screen_width,screen_height))
+win_image = pygame.transform.scale(pygame.image.load("../pic/chapter3win.png"),(screen_width,screen_height))
+bookpage=pygame.transform.scale(pygame.image.load("../pic/chapter3bookpage.png"),(screen_width,screen_height))
+idea=pygame.transform.scale(pygame.image.load("../pic/idea.png"),(300,300))
 # 一些用于游戏状态控制的变量
 current_image = street_image
 show_text = False
@@ -65,7 +65,7 @@ while True:
                 if 692<=x<=755 and 700<=y<=728:
                     current_image=bookpage
                     screen.blit(current_image, (0, 0))
-                    font = pygame.font.Font("../../fonts/SimHei.ttf", 36)
+                    font = pygame.font.Font("../fonts/SimHei.ttf", 36)
                     tmp=50
                     text = "我可以给你提供一些线索，但是这是有代价的\n你需要找到一个发条和一个灰色珠子\n为了赔偿你打扰我的精神损失费：\n你需要等待一坤分（两分半）才能返回大街\n还有，请公平的游戏".split("\n")
                     for line in text:
