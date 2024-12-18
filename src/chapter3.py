@@ -7,7 +7,7 @@ pygame.init()
 # 屏幕尺寸设置
 screen_width = 1920
 screen_height = 1080
-screen = pygame.display.set_mode((screen_width, screen_height))
+screen = pygame.display.set_mode((screen_width, screen_height),pygame.FULLSCREEN)
 pygame.display.set_caption("维多利亚时代的伦敦")
 font = pygame.font.Font("../fonts/SimHei.ttf", 36)
 # 加载大街图片、商店内部图片等资源
