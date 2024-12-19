@@ -19,7 +19,10 @@ BLACK = (0, 0, 0)
 RED = (255, 0, 0)
 GREEN = (0, 255, 0)
 BLUE = (0, 0, 255)
-font = pygame.font.Font("../fonts/SimHei.ttf", 36)
+
+Ammeter1 = round(random.uniform(0.7, 1.5), 1)
+Ammeter2 = round(random.uniform(0.7, 1.5), 1)
+Ammeter = round(random.uniform(1.5, Ammeter1+Ammeter2), 1)
 # 当前关卡
 current_level = 1
 # 用于存储电路相关的对象等（这里简单示例，可根据实际细化）
@@ -35,22 +38,28 @@ wrong_wire_index = None
 # 用于第三题电流表读数相关，这里随机生成一个示例正确读数（范围可根据实际调整）
 correct_ammeter_reading = round(random.uniform(0, 10), 2)
 # 用于第四题电路图片对应的正确数字
-correct_number_for_circuit_image = None
+correct_number_for_circuit_image = [1]
 
 # 输入框相关变量
 input_box = pygame.Rect(300, 250, 200, 40)
-input_text = ""
+input_textL2 = ""
 active = False
 input_pos = 0
 user_input = []
 def draw_input():
-    global user_input,input_pos,input_text
+    global user_input,input_pos,input_textL2
+    problem=f"电流表A1的示数为：{ str(Ammeter1) }\n电流表A2的示数为：{ str(Ammeter2) }\n电流表A的示数为：{ str(Ammeter) }".split("\n")
+    screen.fill(WHITE)
+    tmp=50
+    for line in problem:
+        screen.blit(font.render(line, True, BLACK), (70, tmp))
+        tmp+=50
     """绘制当前密码输入"""
-    text = "       输入密码: "
+    L1text = "输入L2电流: "
     for i in range(input_pos):
-        text += str(user_input[i])
-    input_text = font.render(text, True, WHITE)
-    screen.blit(input_text, (70, 70))
+        L1text += str(user_input[i])
+    input_textL2 = font.render(L1text, True, BLACK)
+    screen.blit(input_textL2, (70, tmp+50))
 def draw_circuit():
     global current_level,one
     screen.fill(WHITE)
@@ -97,12 +106,12 @@ def draw_circuit():
 
     # 绘制输入框
     #print(current_level)
-    if current_level==4:
+    '''if current_level==4:
         print("Yes")
         screen.fill(WHITE)
         pygame.draw.rect(screen, BLACK, input_box, 2)
-        input_surface = font.render(input_text, True, BLACK)
-        screen.blit(input_surface, (input_box.x + 5, input_box.y + 5))
+        input_surface = font.render("请输入答案：", True, BLACK)
+        screen.blit(input_surface, (input_box.x + 5, input_box.y + 5))'''
     
     pygame.display.flip()
 
@@ -138,12 +147,12 @@ def handle_level1():
         elif current_level==2:
             current_level =3
 
-def handle_level2():
+'''def handle_level2():
     global current_level
     if wrong_wire_index is None:
         # 这里假设通过某种交互已经移除了错误导线，简单示例直接设置完成
         #levels_completed[1] = True
-        current_level = 3
+        current_level = 3'''
 
 '''def handle_level3():
     global current_level,input_text
@@ -167,9 +176,9 @@ def handle_level2():
 def handle_level4():
     draw_input()
     global current_level
-    global user_input,input_pos,input_text
-    correct_number_for_circuit_image=[1]
-    for event in pygame.event.get():
+    global user_input,input_pos,input_textL2
+    #correct_number_for_circuit_image=[1]
+    '''for event in pygame.event.get():
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_RETURN:
                 #entered_number = int(input("请输入电路图片对应的数字: "))  # 简单用控制台输入示例
@@ -189,8 +198,8 @@ def handle_level4():
                     input_pos -= 1
             elif pygame.K_0 <= event.key <= pygame.K_9:
                         # 不限数字个数，可以输入更多的数字
-                        user_input.append(event.key - pygame.K_0)
-                        input_pos += 1
+                user_input.append(event.key - pygame.K_0)
+                input_pos += 1'''
 
 
 while True:
@@ -219,7 +228,28 @@ while True:
                     switch_rect = pygame.Rect(1228, 160, 180, 45)
                 if switch_rect.collidepoint(mouse_x, mouse_y):
                     switch_states[i] = not switch_states[i]
-    print(current_level)
+        if event.type == pygame.KEYDOWN and current_level==4:
+            if event.key == pygame.K_RETURN:
+                #entered_number = int(input("请输入电路图片对应的数字: "))  # 简单用控制台输入示例
+                if user_input == correct_number_for_circuit_image:
+                    print("恭喜你，游戏胜利！")
+                    pygame.quit()
+                    sys.exit()
+                
+                else:
+                    
+                    user_input = []  # 重置输入
+                    input_pos = 0
+                    pygame.display.update()
+            elif event.key == pygame.K_BACKSPACE:
+                if input_pos > 0:
+                    user_input.pop()
+                    input_pos -= 1
+            elif pygame.K_0 <= event.key <= pygame.K_9:
+                        # 不限数字个数，可以输入更多的数字
+                user_input.append(event.key - pygame.K_0)
+                input_pos += 1
+    #print(current_level)
     if current_level == 1:
         draw_circuit()
         handle_level1()
@@ -234,7 +264,7 @@ while True:
         handle_level3()'''
         current_level=4
     elif current_level == 4:
-        draw_circuit()
+        #draw_circuit()
         handle_level4()
 
     pygame.display.update()
