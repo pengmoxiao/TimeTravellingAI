@@ -10,8 +10,9 @@ WINDOW_WIDTH = 1920
 WINDOW_HEIGHT = 1080
 screen = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
 pygame.display.set_caption("未来城市电路谜题")
-one=bookpage=pygame.transform.scale(pygame.image.load("../pic/chapter4_1.png"),(WINDOW_WIDTH,WINDOW_HEIGHT))
-boom=bookpage=pygame.transform.scale(pygame.image.load("../pic/chapter4_boom.jpg"),(WINDOW_WIDTH,WINDOW_HEIGHT))
+one=pygame.transform.scale(pygame.image.load("../pic/chapter4_1.png"),(WINDOW_WIDTH,WINDOW_HEIGHT))
+boom=pygame.transform.scale(pygame.image.load("../pic/chapter4_boom.jpg"),(WINDOW_WIDTH,WINDOW_HEIGHT))
+four=pygame.transform.scale(pygame.image.load("../pic/chapter4_4.png"),(WINDOW_WIDTH,WINDOW_HEIGHT))
 font = pygame.font.Font("../fonts/SimHei.ttf", 36)
 # 定义颜色
 WHITE = (255, 255, 255)
@@ -23,6 +24,9 @@ BLUE = (0, 0, 255)
 Ammeter1 = round(random.uniform(0.7, 1.5), 1)
 Ammeter2 = round(random.uniform(0.7, 1.5), 1)
 Ammeter = round(random.uniform(1.5, Ammeter1+Ammeter2), 1)
+i = Ammeter-Ammeter2
+ii = round(Ammeter1 -i,1)
+iii = Ammeter-Ammeter1
 # 当前关卡
 current_level = 1
 # 用于存储电路相关的对象等（这里简单示例，可根据实际细化）
@@ -31,15 +35,14 @@ circuits = []
 levels_completed = [False] * 4
 
 # 用于模拟电路开关状态（示例简单用列表表示，可根据实际复杂程度改对象等）
-switch_states = [False] * 3 # 假设有5个开关，可调整数量
+switch_states = [False] * 3 # 假设有3个开关，可调整数量
 
-# 用于第二题错误导线相关（示例简单用索引表示要移除的导线，可根据实际复杂程度改对象等）
-wrong_wire_index = None
+
 # 用于第三题电流表读数相关，这里随机生成一个示例正确读数（范围可根据实际调整）
-correct_ammeter_reading = round(random.uniform(0, 10), 2)
+#correct_ammeter_reading = round(random.uniform(0, 10), 2)
 # 用于第四题电路图片对应的正确数字
-correct_number_for_circuit_image = [1]
-
+correct_number_for_circuit_image = [num for num in str(ii)]
+print(correct_number_for_circuit_image)
 # 输入框相关变量
 input_box = pygame.Rect(300, 250, 200, 40)
 input_textL2 = ""
@@ -47,9 +50,10 @@ active = False
 input_pos = 0
 user_input = []
 def draw_input():
+    screen.blit(four, (0, 0))
     global user_input,input_pos,input_textL2
     problem=f"电流表A1的示数为：{ str(Ammeter1) }\n电流表A2的示数为：{ str(Ammeter2) }\n电流表A的示数为：{ str(Ammeter) }".split("\n")
-    screen.fill(WHITE)
+    #screen.fill(WHITE)
     tmp=50
     for line in problem:
         screen.blit(font.render(line, True, BLACK), (70, tmp))
@@ -60,6 +64,7 @@ def draw_input():
         L1text += str(user_input[i])
     input_textL2 = font.render(L1text, True, BLACK)
     screen.blit(input_textL2, (70, tmp+50))
+    
 def draw_circuit():
     global current_level,one
     screen.fill(WHITE)
@@ -247,7 +252,10 @@ while True:
                     input_pos -= 1
             elif pygame.K_0 <= event.key <= pygame.K_9:
                         # 不限数字个数，可以输入更多的数字
-                user_input.append(event.key - pygame.K_0)
+                user_input.append(str(event.key - pygame.K_0))
+                input_pos += 1
+            elif pygame.K_PERIOD:
+                user_input.append(".")
                 input_pos += 1
     #print(current_level)
     if current_level == 1:

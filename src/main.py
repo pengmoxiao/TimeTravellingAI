@@ -2,8 +2,8 @@ import pygame, sys
 
 # 初始化
 pygame.init()
-screen_width = 800
-screen_height = 600
+screen_width = 1920 
+screen_height = 1080
 screen = pygame.display.set_mode((screen_width, screen_height))
 pygame.display.set_caption("时间旅行解谜游戏")
 icon = pygame.image.load('../icon.png')
@@ -47,13 +47,22 @@ exit_x = maze_x + 80
 exit_y = maze_y + 100
 exit_size = 20
 exit_color = (0, 255, 0)
-
+WHITE = (255, 255, 255)
+BLACK = (0, 0, 0)
+RED = (255, 0, 0)
+GREEN = (0, 255, 0)
+BLUE = (0, 0, 255)
 # 时间控制
 move_interval = 200  # 单位为毫秒（每0.5秒移动一次）
 last_move_time = 0
 
 # 游戏主循环
 clock = pygame.time.Clock()
+text="Dehou Studio Presents:\nTime Travelling Riddle Game".strip("\n")
+for i in range(60):
+    screen.fill(BLACK)
+    screen.blit(font.render(text[0], True, WHITE), (900, 500))
+    pygame.display.update()
 while True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
