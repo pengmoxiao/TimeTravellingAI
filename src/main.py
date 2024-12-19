@@ -1,4 +1,4 @@
-import pygame, sys
+import pygame, sys,time
 
 # 初始化
 pygame.init()
@@ -11,6 +11,7 @@ pygame.display.set_icon(icon)
 
 # 定义字体
 font = pygame.font.Font("../fonts/SimHei.ttf", 25)
+big_font = pygame.font.Font("../fonts/SimHei.ttf", 50)
 
 # 渲染游戏标题文本
 title_text = font.render("时间旅行解谜", True, (255, 255, 255))
@@ -58,11 +59,29 @@ last_move_time = 0
 
 # 游戏主循环
 clock = pygame.time.Clock()
-text="Dehou Studio Presents:\nTime Travelling Riddle Game".strip("\n")
-for i in range(60):
+text="Dehou Studio Presents:\nTime Travelling Riddle Game".split("\n")
+for i in range(255):
     screen.fill(BLACK)
-    screen.blit(font.render(text[0], True, WHITE), (900, 500))
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            pygame.quit()
+            sys.exit()
+    color=(i,i,i)
+    screen.blit(big_font.render(text[0], True, color), big_font.render(text[0], True, WHITE).get_rect(center=(screen_width // 2, screen_height // 3)))
+    screen.blit(big_font.render(text[1], True, color), big_font.render(text[1], True, WHITE).get_rect(center=(screen_width // 2, screen_height // 3+100)))
     pygame.display.update()
+    time.sleep(0.01)
+for i in range(255,0,-1):
+    screen.fill(BLACK)
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            pygame.quit()
+            sys.exit()
+    color=(i,i,i)
+    screen.blit(big_font.render(text[0], True, color), big_font.render(text[0], True, WHITE).get_rect(center=(screen_width // 2, screen_height // 3)))
+    screen.blit(big_font.render(text[1], True, color), big_font.render(text[1], True, WHITE).get_rect(center=(screen_width // 2, screen_height // 3+100)))
+    pygame.display.update()
+    time.sleep(0.01)
 while True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:

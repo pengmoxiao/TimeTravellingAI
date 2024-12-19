@@ -1,7 +1,7 @@
 from os import error
 import pygame
 import sys
-import random
+import random,time
 from time import sleep
 pygame.init()
 
@@ -13,6 +13,8 @@ pygame.display.set_caption("未来城市电路谜题")
 one=pygame.transform.scale(pygame.image.load("../pic/chapter4_1.png"),(WINDOW_WIDTH,WINDOW_HEIGHT))
 boom=pygame.transform.scale(pygame.image.load("../pic/chapter4_boom.jpg"),(WINDOW_WIDTH,WINDOW_HEIGHT))
 four=pygame.transform.scale(pygame.image.load("../pic/chapter4_4.png"),(WINDOW_WIDTH,WINDOW_HEIGHT))
+end=pygame.transform.scale(pygame.image.load("../pic/the_end.png"),(WINDOW_WIDTH,WINDOW_HEIGHT))
+idea=pygame.transform.scale(pygame.image.load("../pic/idea.png"),(300,300))
 font = pygame.font.Font("../fonts/SimHei.ttf", 36)
 # 定义颜色
 WHITE = (255, 255, 255)
@@ -37,7 +39,7 @@ levels_completed = [False] * 4
 # 用于模拟电路开关状态（示例简单用列表表示，可根据实际复杂程度改对象等）
 switch_states = [False] * 3 # 假设有3个开关，可调整数量
 
-
+hint=False
 # 用于第三题电流表读数相关，这里随机生成一个示例正确读数（范围可根据实际调整）
 #correct_ammeter_reading = round(random.uniform(0, 10), 2)
 # 用于第四题电路图片对应的正确数字
@@ -118,7 +120,7 @@ def draw_circuit():
         input_surface = font.render("请输入答案：", True, BLACK)
         screen.blit(input_surface, (input_box.x + 5, input_box.y + 5))'''
     
-    pygame.display.flip()
+    #pygame.display.flip()
 
 def handle_level1():
     global current_level
@@ -215,6 +217,8 @@ while True:
         elif event.type == pygame.MOUSEBUTTONDOWN:
             # 判断鼠标点击是否在开关区域来切换开关状态并更新显示颜色
             mouse_x, mouse_y = pygame.mouse.get_pos()
+            if 1700<=mouse_x<=1848 and 836<=mouse_y<=1024:
+                hint=(not hint)
             print(mouse_x,mouse_y)
             '''
             pygame.draw.rect(screen, color, (531, 468, 180, 60))
@@ -237,7 +241,17 @@ while True:
             if event.key == pygame.K_RETURN:
                 #entered_number = int(input("请输入电路图片对应的数字: "))  # 简单用控制台输入示例
                 if user_input == correct_number_for_circuit_image:
-                    print("恭喜你，游戏胜利！")
+                    #print("恭喜你，游戏胜利！")
+                    screen.blit(end, (0, 0))
+                    big_font=pygame.font.Font("../fonts/SimHei.ttf", 72)
+                    screen.blit(big_font.render("Thanks For Playing", True, (255, 255, 255)), big_font.render("Thanks For Playing", True, (255, 255, 255)).get_rect(center=(WINDOW_WIDTH // 2, WINDOW_HEIGHT-WINDOW_HEIGHT // 7)))
+                    for i in range(5):
+                        for event in pygame.event.get():
+                            if event.type == pygame.QUIT:
+                                pygame.display.flip()
+                                
+                        pygame.display.flip()
+                        time.sleep(1)
                     pygame.quit()
                     sys.exit()
                 
@@ -245,7 +259,7 @@ while True:
                     
                     user_input = []  # 重置输入
                     input_pos = 0
-                    pygame.display.update()
+                    
             elif event.key == pygame.K_BACKSPACE:
                 if input_pos > 0:
                     user_input.pop()
@@ -258,6 +272,7 @@ while True:
                 user_input.append(".")
                 input_pos += 1
     #print(current_level)
+    
     if current_level == 1:
         draw_circuit()
         handle_level1()
@@ -274,5 +289,10 @@ while True:
     elif current_level == 4:
         #draw_circuit()
         handle_level4()
-
+    screen.blit(idea, (WINDOW_WIDTH-300, WINDOW_HEIGHT-300))
+    
+    if hint:
+        text = font.render("你来到了未来，你需要答出电路谜题才能回到现在", True, BLACK)
+        screen.blit(text, (350,WINDOW_HEIGHT-100))
     pygame.display.update()
+    pygame.display.flip()
