@@ -4,7 +4,7 @@ import pygame, sys
 pygame.init()
 screen_width = 1920 
 screen_height = 1080
-screen = pygame.display.set_mode((screen_width, screen_height))
+screen = pygame.display.set_mode((screen_width, screen_height),pygame.FULLSCREEN)
 pygame.display.set_caption("时间旅行解谜游戏")
 icon = pygame.image.load('../icon.png')
 pygame.display.set_icon(icon)

@@ -5,7 +5,7 @@ import sys
 pygame.init()
 
 # Constants
-SCREEN_WIDTH, SCREEN_HEIGHT = 800, 600
+SCREEN_WIDTH, SCREEN_HEIGHT = 1920,1080
 FONT_SIZE = 24
 BG_COLOR = (30, 30, 30)
 TEXT_COLOR = (200, 200, 200)
@@ -13,7 +13,7 @@ BUTTON_COLOR = (50, 50, 150)
 HOVER_COLOR = (100, 100, 200)
 
 # Setup screen
-screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT),pygame.FULLSCREEN)
 pygame.display.set_caption("Ancient Pyramid Adventure")
 
 # Font setup
