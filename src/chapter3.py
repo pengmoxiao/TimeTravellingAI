@@ -99,6 +99,7 @@ while True:
         screen.blit(win_image, (0, 0))
         pygame.display.flip()
         time.sleep(3)
+        import chapter4
         pygame.quit()
         sys.exit()
 

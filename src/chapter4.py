@@ -252,6 +252,37 @@ while True:
                                 
                         pygame.display.flip()
                         time.sleep(1)
+                    text="Dehou Studio Presents:\nTime Travelling Riddle Game".split("\n")
+                    
+                    for i in range(255):
+                        tmp=50
+                        screen.fill(BLACK)
+                        for event in pygame.event.get():
+                            if event.type == pygame.QUIT:
+                                pygame.quit()
+                                sys.exit()
+                        color=(i,i,i)
+                        for line in text:
+                            screen.blit(font.render(line, True, color), font.render(line, True, WHITE).get_rect(center=(WINDOW_WIDTH // 2, tmp)))
+                            tmp+=50
+                        #screen.blit(font.render(text[1], True, color), font.render(text[1], True, WHITE).get_rect(center=(WINDOW_WIDTH // 2, WINDOW_HEIGHT // 3+100)))
+                        pygame.display.update()
+                        time.sleep(0.01)
+                    
+                    for i in range(255,0,-1):
+                        tmp=50
+                        screen.fill(BLACK)
+                        for event in pygame.event.get():
+                            if event.type == pygame.QUIT:
+                                pygame.quit()
+                                sys.exit()
+                        color=(i,i,i)
+                        for line in text:
+                            screen.blit(font.render(line, True, color), font.render(line, True, WHITE).get_rect(center=(WINDOW_WIDTH // 2, tmp)))
+                            tmp+=50
+                        #screen.blit(font.render(text[1], True, color), font.render(text[1], True, WHITE).get_rect(center=(WINDOW_WIDTH // 2, WINDOW_HEIGHT // 3+100)))
+                        pygame.display.update()
+                        time.sleep(0.01)
                     pygame.quit()
                     sys.exit()
                 
