@@ -63,7 +63,11 @@ Warning: Don't move main.exe!
 
 - 803 - Joey: Provide ammeter calculation code
 
-- 1333 - Mr. Wan & Mr.Pan: Provide computer rooms.
+- 1333&1310 - Mr. Wan & Mr.Pan: Provide computer rooms.
+
+- Git-2.47.0.2-64-bit.exe
+
+- [Python](https://www.python.org)
 
 - Parents: providing support.
 

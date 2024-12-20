@@ -15,6 +15,7 @@ boom=pygame.transform.scale(pygame.image.load("../pic/chapter4_boom.jpg"),(WINDO
 four=pygame.transform.scale(pygame.image.load("../pic/chapter4_4.png"),(WINDOW_WIDTH,WINDOW_HEIGHT))
 end=pygame.transform.scale(pygame.image.load("../pic/the_end.png"),(WINDOW_WIDTH,WINDOW_HEIGHT))
 idea=pygame.transform.scale(pygame.image.load("../pic/idea.png"),(300,300))
+logo=pygame.transform.scale(pygame.image.load("../pic/Logo.png"),(500,500))
 font = pygame.font.Font("../fonts/SimHei.ttf", 36)
 # 定义颜色
 WHITE = (255, 255, 255)
@@ -51,6 +52,36 @@ input_textL2 = ""
 active = False
 input_pos = 0
 user_input = []
+def show_thanks(text):
+    for i in range(255):
+        tmp=WINDOW_HEIGHT//2-len(text)*25
+        screen.fill(BLACK)
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+        color=(i,i,i)
+        for line in text:
+            screen.blit(font.render(line, True, color), font.render(line, True, WHITE).get_rect(center=(WINDOW_WIDTH // 2, tmp)))
+            tmp+=50
+        #screen.blit(font.render(text[1], True, color), font.render(text[1], True, WHITE).get_rect(center=(WINDOW_WIDTH // 2, WINDOW_HEIGHT // 3+100)))
+        pygame.display.update()
+        time.sleep(0.01)
+    
+    for i in range(255,0,-1):
+        tmp=WINDOW_HEIGHT//2-len(text)*25
+        screen.fill(BLACK)
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+        color=(i,i,i)
+        for line in text:
+            screen.blit(font.render(line, True, color), font.render(line, True, WHITE).get_rect(center=(WINDOW_WIDTH // 2, tmp)))
+            tmp+=50
+        #screen.blit(font.render(text[1], True, color), font.render(text[1], True, WHITE).get_rect(center=(WINDOW_WIDTH // 2, WINDOW_HEIGHT // 3+100)))
+        pygame.display.update()
+        time.sleep(0.01)
 def draw_input():
     screen.blit(four, (0, 0))
     global user_input,input_pos,input_textL2
@@ -252,10 +283,16 @@ while True:
                                 
                         pygame.display.flip()
                         time.sleep(1)
-                    text="Dehou Studio Presents:\nTime Travelling Riddle Game".split("\n")
                     
+                    show_thanks("Time Travelling Riddle Game\n\n鸣谢名单".split("\n"))
+                    show_thanks("项目总负责与制作：\n\nDehou Studio:\n803徐博扬\n803彭莫晓".split("\n"))
+                    show_thanks("AI工具：\n\n豆包\nChatGPT 4o\nHappyAPI\nDeepL\n通义千问".split("\n"))
+                    show_thanks("友情援助：\n\n803朱辰希——绘制电路图\n803周靖航——提供电流表计算代码\n1333机房万老师——提供机房\n1310机房潘老师——提供机房\nGit-2.47.0.2-64-bit.exe\nPython\n给予支持的家长".split("\n"))
+                    show_thanks("网站：\n\nai.moxiao.site\nalist.moxiao.site\nwww.52oi.com\nwww.github.com\nwww.bing.com".split("\n"))
+                    show_thanks("当然，\n\n还有屏幕前玩游戏的你\n感谢你们的支持！！！".split("\n"))
+                    text="(c)2024 Dehou Studio. All Rights Reserved.".split("\n")
                     for i in range(255):
-                        tmp=50
+                        tmp=WINDOW_HEIGHT//2-len(text)*25
                         screen.fill(BLACK)
                         for event in pygame.event.get():
                             if event.type == pygame.QUIT:
@@ -263,14 +300,15 @@ while True:
                                 sys.exit()
                         color=(i,i,i)
                         for line in text:
-                            screen.blit(font.render(line, True, color), font.render(line, True, WHITE).get_rect(center=(WINDOW_WIDTH // 2, tmp)))
+                            screen.blit(big_font.render(line, True, color), big_font.render(line, True, WHITE).get_rect(center=(WINDOW_WIDTH // 2, tmp-200)))
                             tmp+=50
-                        #screen.blit(font.render(text[1], True, color), font.render(text[1], True, WHITE).get_rect(center=(WINDOW_WIDTH // 2, WINDOW_HEIGHT // 3+100)))
+                        #screen.blit(big_font.render(text[1], True, color), big_font.render(text[1], True, WHITE).get_rect(center=(WINDOW_WIDTH // 2, WINDOW_HEIGHT // 3+100)))
+                        screen.blit(logo,(710,500))
                         pygame.display.update()
                         time.sleep(0.01)
                     
                     for i in range(255,0,-1):
-                        tmp=50
+                        tmp=WINDOW_HEIGHT//2-len(text)*25
                         screen.fill(BLACK)
                         for event in pygame.event.get():
                             if event.type == pygame.QUIT:
@@ -278,11 +316,15 @@ while True:
                                 sys.exit()
                         color=(i,i,i)
                         for line in text:
-                            screen.blit(font.render(line, True, color), font.render(line, True, WHITE).get_rect(center=(WINDOW_WIDTH // 2, tmp)))
+                            screen.blit(big_font.render(line, True, color), big_font.render(line, True, WHITE).get_rect(center=(WINDOW_WIDTH // 2, tmp-200)))
                             tmp+=50
+                        screen.blit(logo,(710,500))
                         #screen.blit(font.render(text[1], True, color), font.render(text[1], True, WHITE).get_rect(center=(WINDOW_WIDTH // 2, WINDOW_HEIGHT // 3+100)))
                         pygame.display.update()
                         time.sleep(0.01)
+
+                        #screen.blit(font.render(text[1], True, color), font.render(text[1], True, WHITE).get_rect(center=(WINDOW_WIDTH // 2, WINDOW_HEIGHT // 3+100)))
+                        
                     pygame.quit()
                     sys.exit()
                 

@@ -62,7 +62,11 @@ pyinstaller -F -i ./icon.ico --noconsole src/main.py
 
 - 803 - 周靖航: 提供电路图计算代码
 
-- 1333 - 万老师&潘老师: 提供机房
+- 1333&1310 - 万老师&潘老师: 提供机房
+
+- Git-2.47.0.2-64-bit.exe
+
+- [Python](https://www.python.org)
 
 - 提供支持的家长
 
