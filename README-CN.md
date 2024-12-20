@@ -64,10 +64,6 @@ pyinstaller -F -i ./icon.ico --noconsole src/main.py
 
 - 1333&1310 - 万老师&潘老师: 提供机房
 
-- Git-2.47.0.2-64-bit.exe
-
-- [Python](https://www.python.org)
-
 - 提供支持的家长
 
 - 还有，正在玩游戏的你们
@@ -87,6 +83,8 @@ pyinstaller -F -i ./icon.ico --noconsole src/main.py
 - [52OI](https://52oi.com/)
 
 - [Bing](https://bing.com/)
+
+- [Python](https://www.python.org)
 
 - ~~[Ikuuu??](https://ikuuu.one/auth/register?code=nBzb)~~
 
