@@ -65,10 +65,6 @@ Warning: Don't move main.exe!
 
 - 1333&1310 - Mr. Wan & Mr.Pan: Provide computer rooms.
 
-- Git-2.47.0.2-64-bit.exe
-
-- [Python](https://www.python.org)
-
 - Parents: providing support.
 
 - And, for those of you who are playing the game.
@@ -88,6 +84,8 @@ Warning: Don't move main.exe!
 - [52OI](https://52oi.com/)
 
 - [Bing](https://bing.com/)
+
+- [Python](https://www.python.org)
 
 - ~~[Ikuuu??](https://ikuuu.one/auth/register?code=nBzb)~~
 
