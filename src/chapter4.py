@@ -154,7 +154,7 @@ def draw_circuit():
     #pygame.display.flip()
 
 def handle_level1():
-    global current_level
+    global current_level,switch_states
     # 假设正确的开关状态组合（这里简单示例，可按实际改复杂逻辑）
     error_combination=[True,True,True]
     if current_level==1:
@@ -164,19 +164,28 @@ def handle_level1():
     #print(switch_states)
     if switch_states==error_combination:
         screen.blit(boom, (0, 0))
-        pygame.display.flip()
+        #pygame.display.flip()
         tmp=50
         text = "电池短路爆炸了\n你需要等待一坤分（两分半）才能继续游戏\n还有，请公平的游戏".split("\n")
         for line in text:
             screen.blit(font.render(line, True, (255, 255, 255)), (50, tmp))
             tmp+=50
         for i in range(150):
+            screen.fill(WHITE)
+            screen.blit(boom, (0, 0))
+            tmp=50
+            text = "电池短路爆炸了\n你需要等待一坤分（两分半）才能继续游戏\n还有，请公平的游戏".split("\n")
+            for line in text:
+                screen.blit(font.render(line, True, (255, 255, 255)), (50, tmp))
+                tmp+=50
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.display.flip()
-                    
+            screen.blit(font.render(f"倒计时：{150-i}秒", True, (255, 255, 255)), (50, 215))      
+            pygame.display.update()
             pygame.display.flip()
             sleep(1)
+        switch_states=[False,False,False]
     if switch_states == correct_combination:
         #levels_completed[0] = True
         print(current_level,type(current_level))

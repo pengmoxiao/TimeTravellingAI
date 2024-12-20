@@ -24,6 +24,7 @@ game_won = False
 hidden1=False
 hidden2=False
 hint=False
+WHITE = (255, 255, 255)
 while True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -65,7 +66,7 @@ while True:
                 if 692<=x<=755 and 700<=y<=728:
                     current_image=bookpage
                     screen.blit(current_image, (0, 0))
-                    font = pygame.font.Font("../fonts/SimHei.ttf", 36)
+                    
                     tmp=50
                     text = "我可以给你提供一些线索，但是这是有代价的\n你需要找到一个发条和一个灰色珠子\n为了赔偿你打扰我的精神损失费：\n你需要等待一坤分（两分半）才能返回大街\n还有，请公平的游戏".split("\n")
                     for line in text:
@@ -76,10 +77,19 @@ while True:
 
                     pygame.display.flip()
                     for i in range(150):
+                        screen.fill(WHITE)
+                        screen.blit(current_image, (0, 0))
+                    
+                        tmp=50
+                        text = "我可以给你提供一些线索，但是这是有代价的\n你需要找到一个发条和一个灰色珠子\n为了赔偿你打扰我的精神损失费：\n你需要等待一坤分（两分半）才能返回大街\n还有，请公平的游戏".split("\n")
+                        for line in text:
+                            screen.blit(font.render(line, True, (255, 255, 255)), (50, tmp))
+                            tmp+=50
                         for event in pygame.event.get():
                             if event.type == pygame.QUIT:
                                 pygame.display.flip()
-                                
+                        screen.blit(font.render(f"倒计时：{150-i}秒", True, (255, 255, 255)), (50, 520))     
+
                         pygame.display.flip()
                         time.sleep(1)
                     current_image=rainy_street_image
